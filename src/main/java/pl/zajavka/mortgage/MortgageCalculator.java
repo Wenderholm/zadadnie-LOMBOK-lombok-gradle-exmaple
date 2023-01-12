@@ -23,23 +23,23 @@ public class MortgageCalculator {
         overpaymentSchema.put(78, BigDecimal.valueOf(18000));
 
         // Ważne jest to aby zwrócić uwagę, na to, które dane wejściowe są nadpisywane przez withery
-        InputData defaultInputData = new InputData()
+        InputData defaultInputData = InputData.defaultInputData()
             .withAmount(new BigDecimal("296192.11"))
             .withMonthsDuration(BigDecimal.valueOf(360))
             .withOverpaymentReduceWay(Overpayment.REDUCE_PERIOD)
-            .withType(MortgageType.DECREASING)
+            .withRateType(MortgageType.DECREASING)
             .withOverpaymentSchema(overpaymentSchema);
 
         PrintingService printingService = new PrintingServiceImpl();
         RateCalculationService rateCalculationService = new RateCalculationServiceImpl(
-            new TimePointCalculationServiceImpl(),
-            new OverpaymentCalculationServiceImpl(),
-            new AmountsCalculationServiceImpl(
-                new ConstantAmountsCalculationServiceImpl(),
-                new DecreasingAmountsCalculationServiceImpl()
-            ),
-            new ResidualCalculationServiceImpl(),
-            new ReferenceCalculationServiceImpl()
+                new TimePointCalculationServiceImpl(),
+                new OverpaymentCalculationServiceImpl(),
+                new AmountsCalculationServiceImpl(
+                        new ConstantAmountsCalculationServiceImpl(),
+                        new DecreasingAmountsCalculationServiceImpl()
+                ),
+                new ResidualCalculationServiceImpl(),
+                new ReferenceCalculationServiceImpl()
         );
 
         MortgageCalculationService mortgageCalculationService = new MortgageCalculationServiceImpl(

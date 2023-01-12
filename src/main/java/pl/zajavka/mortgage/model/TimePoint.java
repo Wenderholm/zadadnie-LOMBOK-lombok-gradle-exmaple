@@ -1,8 +1,12 @@
 package pl.zajavka.mortgage.model;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
-
+@Getter
+@RequiredArgsConstructor
 public class TimePoint {
 
     private final BigDecimal year;
@@ -11,21 +15,4 @@ public class TimePoint {
 
     private final LocalDate date;
 
-    public TimePoint(final BigDecimal year, final BigDecimal month, final LocalDate date) {
-        this.year = year;
-        this.month = month;
-        this.date = date;
-    }
-
-    public BigDecimal getYear() {
-        return year;
-    }
-
-    public BigDecimal getMonth() {
-        return month;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
 }
